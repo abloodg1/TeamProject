@@ -4,12 +4,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import javax.xml.soap.Text;
+
 public class throwable {
     int screenWidth = Gdx.graphics.getWidth();
     int screenHeight = Gdx.graphics.getHeight();
     Texture img;
-    double grav = 5;
-    float x = (float)(Math.random() * screenWidth);
+    float grav = 5;
+    float x = (float) (Math.random() * screenWidth);
     float y = 0;
     double minHeight;
     double maxHeight = screenHeight - 100;
