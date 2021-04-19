@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.states.GameState;
 import com.mygdx.game.throwable;
 import com.mygdx.game.utils.Handler;
+import com.mygdx.game.utils.Utils;
 
 import java.util.ArrayList;
 
@@ -19,7 +20,7 @@ public class SliceState extends GameState {
         this.handler = Handler.getInstance();
         inputProcessor = new SliceInputProcessor();
         gun = new ArrayList<>();
-        background = new Texture("collgeback.jpg");
+        background = new Texture("collegeback.jpg");
         books = new ArrayList<>();
         books.add(new Texture("ScienceTextbook.png"));
         books.add(new Texture("MathTextbook.png"));
@@ -30,6 +31,7 @@ public class SliceState extends GameState {
 
 
     public void render(SpriteBatch batch) {
+        Utils.drawImg();
         for (throwable bullet : gun) {
             bullet.draw(batch);
             bullet.update();
