@@ -13,13 +13,17 @@ public class SliceState extends GameState {
     private final Handler handler;
     private final ArrayList<throwable> gun;
     private final ArrayList<Texture> books;
+    Texture background;
 
     public SliceState() {
         this.handler = Handler.getInstance();
         inputProcessor = new SliceInputProcessor();
         gun = new ArrayList<>();
+        background = new Texture("collgeback.jpg");
         books = new ArrayList<>();
         books.add(new Texture("ScienceTextbook.png"));
+        books.add(new Texture("MathTextbook.png"));
+        books.add(new Texture("EnglishTextbook.png"));
         int index = (int) (Math.random() * books.size());
         gun.add(new throwable(books.get(index)));
     }
