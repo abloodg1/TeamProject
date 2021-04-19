@@ -14,6 +14,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	private Handler handler;
 	private SliceState sliceState;
 
+	Texture background;
 
 	private static final float SCREEN_WIDTH = 800;
 	private static final float SCREEN_HEIGHT = 1600;
@@ -23,6 +24,7 @@ public class MyGdxGame extends ApplicationAdapter {
 
 	@Override
 	public void create() {
+
 		handler = Handler.getInstance();
 
 		handler.screenWidth = SCREEN_WIDTH;
@@ -33,6 +35,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		handler.camera = camera;
 
 		batch = new SpriteBatch();
+		background = new Texture("collegeback.jpg");
 
 		sliceState = new SliceState();
 		handler.setActiveState(sliceState);
