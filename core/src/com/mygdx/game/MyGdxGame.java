@@ -9,12 +9,17 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.states.Slice.SliceState;
 import com.mygdx.game.utils.Handler;
 
+import java.util.ArrayList;
+
+import javax.xml.soap.Text;
+
 public class MyGdxGame extends ApplicationAdapter {
 	SpriteBatch batch;
 	private Handler handler;
 	private SliceState sliceState;
 
-	Texture background;
+	Texture background, englishBook, mathBook, scienceBook;
+	ArrayList<Texture> books;
 
 	private static final float SCREEN_WIDTH = 800;
 	private static final float SCREEN_HEIGHT = 1600;
@@ -36,6 +41,13 @@ public class MyGdxGame extends ApplicationAdapter {
 
 		batch = new SpriteBatch();
 		background = new Texture("collegeback.jpg");
+		books = new ArrayList<>();
+		englishBook = new Texture("EnglishTextbook.png");
+		books.add(englishBook);
+		mathBook = new Texture("MathTextbook.png");
+		books.add(mathBook);
+		scienceBook = new Texture("ScienceTextbook.png");
+		books.add(scienceBook);
 
 		sliceState = new SliceState();
 		handler.setActiveState(sliceState);
