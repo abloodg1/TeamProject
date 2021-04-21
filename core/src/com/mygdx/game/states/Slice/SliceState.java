@@ -8,6 +8,7 @@ import com.mygdx.game.utils.Handler;
 import com.mygdx.game.utils.Utils;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class SliceState extends GameState {
     private final SliceInputProcessor inputProcessor;
@@ -15,6 +16,8 @@ public class SliceState extends GameState {
     private final ArrayList<throwable> gun;
     private final ArrayList<Texture> books;
     Texture background;
+    int timer = 0;
+    int index = 0;
 
     public SliceState() {
         this.handler = Handler.getInstance();
@@ -25,16 +28,21 @@ public class SliceState extends GameState {
         books.add(new Texture("ScienceTextbook.png"));
         books.add(new Texture("MathTextbook.png"));
         books.add(new Texture("EnglishTextbook.png"));
-        int index = (int) (Math.random() * books.size());
-        gun.add(new throwable(books.get(index)));
+        //int index = (int) (Math.random() * books.size());
+        gun.add(new throwable(books.get(0)));
+        gun.add(new throwable(books.get(1)));
+        gun.add(new throwable(books.get(2)));
     }
 
 
     public void render(SpriteBatch batch) {
-        Utils.drawImg();
-        for (throwable bullet : gun) {
-            bullet.draw(batch);
-            bullet.update();
+        //batch.draw(img, dim.x, dim.y, dim.width, dim.height);
+        timer++;
+        if (timer%60 == 0) {
+            gun.get(index).draw(batch);
+            gun.get(index).update();
+            index++;
+            //reset index here
         }
 
     }
