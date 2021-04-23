@@ -23,23 +23,30 @@ public class throwable {
     float yV;
 
 
-    public throwable(Texture sprite){
+    public throwable(Texture sprite) {
         img = sprite;
-        xV = (float)(1 + (Math.random() * 5));
-       yV = (float)(30 + (Math.random() * 3));
-        if(x > (screenWidth-imgWidth)/2){
+        xV = (float) (1 + (Math.random() * 5));
+        yV = (float) (30 + (Math.random() * 3));
+        if (x > (screenWidth - imgWidth) / 2) {
             xV = xV * -1;
         }
     }
 
-    public void draw(SpriteBatch batch){
+    public throwable(throwable paperback) {
+        img = paperback.img;
+        xV = paperback.xV;
+        yV = paperback.yV;
+    }
+
+    public void draw(SpriteBatch batch) {
         batch.draw(img, x, y, imgWidth, imgHeight);
     }
-    public double getX(){
+
+    public double getX() {
         return x;
     }
 
-    public double getY(){
+    public double getY() {
         return y;
     }
 

@@ -40,7 +40,7 @@ public class SliceState extends GameState {
     public void render(SpriteBatch batch) {
         timer++;
         if (timer % 60 == 0) {
-            thrown.add(gun.get(index));
+            thrown.add(new throwable(gun.get(index)));
             if (index + 1 >= gun.size()) {
                 index = 0;
             } else {
