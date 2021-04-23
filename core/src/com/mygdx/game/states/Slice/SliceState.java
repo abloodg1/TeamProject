@@ -39,7 +39,7 @@ public class SliceState extends GameState {
 
     public void render(SpriteBatch batch) {
         timer++;
-        if (timer % 60 == 0) {
+        if (timer % 30 == 0) {
             thrown.add(new throwable(gun.get(index)));
             if (index + 1 >= gun.size()) {
                 index = 0;
@@ -47,9 +47,15 @@ public class SliceState extends GameState {
                 index++;
             }
         }
-        for (throwable book : thrown) {
+        for (int i = 0; i < thrown.size(); i++) {
+            throwable book = thrown.get(i);
             book.draw(batch);
             book.update();
+            if (book.getY() < 0 - book.getImgHeight()) {
+                thrown.remove(book);
+                i--;
+            }
+
         }
 
     }

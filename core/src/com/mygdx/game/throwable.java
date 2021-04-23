@@ -13,10 +13,15 @@ public class throwable {
     float screenHeight = handler.screenHeight;
     Texture img;
     float grav = 1;
+
+    public float getImgHeight() {
+        return imgHeight;
+    }
+
     float imgHeight = 750;
     float imgWidth = 300;
-    float x = (float) (Math.random() * (screenWidth-imgWidth));
-    float y = 0-imgHeight;
+    float x = (float) (Math.random() * (screenWidth - imgWidth));
+    float y = 0 - imgHeight;
     double minHeight;
     double maxHeight = screenHeight - imgHeight;
     float xV;
