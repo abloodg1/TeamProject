@@ -39,7 +39,11 @@ public class SliceState extends GameState {
         if(timer%60 == 0){
             gun.get(index).draw(batch);
             gun.get(index).update();
-            index++;
+            if (index + 1 >= gun.size()) {
+                index = 0;
+            } else {
+                index++;
+            }
         }
 
     }
