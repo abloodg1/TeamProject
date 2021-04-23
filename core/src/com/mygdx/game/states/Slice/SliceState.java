@@ -8,16 +8,15 @@ import com.mygdx.game.utils.Handler;
 import com.mygdx.game.utils.Utils;
 
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 public class SliceState extends GameState {
     private final SliceInputProcessor inputProcessor;
     private final Handler handler;
     private final ArrayList<throwable> gun;
     private final ArrayList<Texture> books;
-    Texture background;
     int timer = 0;
     int index = 0;
+    Texture background;
 
     public SliceState() {
         this.handler = Handler.getInstance();
@@ -36,13 +35,11 @@ public class SliceState extends GameState {
 
 
     public void render(SpriteBatch batch) {
-        //batch.draw(img, dim.x, dim.y, dim.width, dim.height);
         timer++;
-        if (timer%60 == 0) {
+        if(timer%60 == 0){
             gun.get(index).draw(batch);
             gun.get(index).update();
             index++;
-            //reset index here
         }
 
     }
