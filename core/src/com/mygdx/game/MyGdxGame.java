@@ -17,6 +17,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	SpriteBatch batch;
 	private Handler handler;
 	private SliceState sliceState;
+	private Texture background;
 
 	private static final float SCREEN_WIDTH = 800;
 	private static final float SCREEN_HEIGHT = 1600;
@@ -31,6 +32,8 @@ public class MyGdxGame extends ApplicationAdapter {
 
 		handler.screenWidth = SCREEN_WIDTH;
 		handler.screenHeight = SCREEN_HEIGHT;
+
+		background = new Texture(Gdx.files.internal("collegeback.jpg"));
 
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -49,6 +52,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
+		batch.draw(background, 0, 0, handler.screenWidth, handler.screenHeight);
 		handler.activeState.render(batch);
 		handler.activeState.tick();
 		batch.end();
