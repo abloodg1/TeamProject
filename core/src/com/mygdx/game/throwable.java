@@ -69,7 +69,7 @@ public class throwable {
 
     public void update(){
         x = x + xV;
-        y = y + yV;
+        y = y + yV + 25;
         yV = yV - grav;
     }
 }
