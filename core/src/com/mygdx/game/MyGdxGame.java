@@ -44,6 +44,8 @@ public class MyGdxGame extends ApplicationAdapter {
 		sliceState = new SliceState();
 		handler.setActiveState(sliceState);
 
+
+
 	}
 
 	@Override
