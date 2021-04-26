@@ -12,7 +12,6 @@ import java.util.ArrayList;
 public class SliceState extends GameState {
     private final SliceInputProcessor inputProcessor;
     private final Handler handler;
-    private final ArrayList<throwable> gun;
     private final ArrayList<Texture> books;
     private final ArrayList<throwable> thrown;
     int timer = 0;
@@ -23,7 +22,6 @@ public class SliceState extends GameState {
         this.handler = Handler.getInstance();
         inputProcessor = new SliceInputProcessor();
 
-        gun = new ArrayList<>();
         thrown = new ArrayList<>();
         background = new Texture("collegeback.jpg");
         books = new ArrayList<>();
@@ -31,17 +29,14 @@ public class SliceState extends GameState {
         books.add(new Texture("MathTextbook.png"));
         books.add(new Texture("EnglishTextbook.png"));
         //int index = (int) (Math.random() * books.size());
-        gun.add(new throwable(books.get(0)));
-        gun.add(new throwable(books.get(1)));
-        gun.add(new throwable(books.get(2)));
     }
 
 
     public void render(SpriteBatch batch) {
         timer++;
         if (timer % 30 == 0) {
-            thrown.add(new throwable(gun.get(index)));
-            if (index + 1 >= gun.size()) {
+            thrown.add(new throwable(books.get(index)));
+            if (index + 1 >= books.size()) {
                 index = 0;
             } else {
                 index++;
