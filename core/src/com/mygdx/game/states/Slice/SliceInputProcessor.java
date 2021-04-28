@@ -1,5 +1,7 @@
 package com.mygdx.game.states.Slice;
 
+import com.badlogic.gdx.Application;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -23,7 +25,14 @@ public class SliceInputProcessor implements InputProcessor {
     public static int iter = 2;
     private static final float tolerance = 35f;
 
+    public boolean isTouched() {
+        return isTouched;
+    }
+
+    public boolean isTouched = false;
+
     public SliceInputProcessor() {
+        Gdx.app.setLogLevel(Application.LOG_DEBUG);
         handler = Handler.getInstance();
         this.points = new ArrayList<>();
         this.safety = new ArrayList<>();
@@ -39,6 +48,7 @@ public class SliceInputProcessor implements InputProcessor {
     public void execute() {
         linemaker(points, simplified, tolerance);
     }
+
 
     @Override
     public boolean keyDown(int keycode) {
@@ -60,14 +70,21 @@ public class SliceInputProcessor implements InputProcessor {
         Vector3 mathVector = Utils.getCameraPosFromMousePos(handler.camera, screenX, screenY);
         float translatedX = mathVector.x;
         float translatedY = mathVector.y;
-        this.points.add(new Vector2(translatedX, translatedY)); //first point
+        Vector2 newPoint = new Vector2(translatedX, translatedY);
+        this.points.add(newPoint); //first point
+        getLast = newPoint;
         execute();
+        isTouched = true;
+        String test1 = "Successfully added point: ";
+        String test2 = newPoint.toString();
+        Gdx.app.debug("Touchdown", test1 + test2);
         return false;
     }
 
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        isTouched = false;
         return false;
     }
 
@@ -84,6 +101,7 @@ public class SliceInputProcessor implements InputProcessor {
             execute();
             return true;
         }
+        isTouched = true;
         return false;
     }
 

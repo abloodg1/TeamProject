@@ -1,7 +1,9 @@
 package com.mygdx.game.states.Slice;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.states.GameState;
 import com.mygdx.game.throwable;
 import com.mygdx.game.utils.Handler;
@@ -17,6 +19,7 @@ public class SliceState extends GameState {
     int timer = 0;
     int index = 0;
     Texture background;
+    Texture sliceDot;
 
     public SliceState() {
         this.handler = Handler.getInstance();
@@ -25,6 +28,7 @@ public class SliceState extends GameState {
         thrown = new ArrayList<>();
         background = new Texture("collegeback.jpg");
         books = new ArrayList<>();
+        sliceDot = new Texture("SliceDot.png");
         books.add(new Texture("ScienceTextbook.png"));
         books.add(new Texture("MathTextbook.png"));
         books.add(new Texture("EnglishTextbook.png"));
@@ -33,6 +37,7 @@ public class SliceState extends GameState {
 
 
     public void render(SpriteBatch batch) {
+        batch.draw(background, 0, 0, handler.screenWidth, handler.screenHeight);
         timer++;
         if (timer % 30 == 0) {
             thrown.add(new throwable(books.get(index)));
@@ -50,9 +55,16 @@ public class SliceState extends GameState {
                 thrown.remove(book);
                 i--;
             }
-
+        }
+        if (inputProcessor.isTouched()) {
+            for (Vector2 point : inputProcessor.points)
+                batch.draw(sliceDot, point.x, point.y);
         }
 
+    }
+
+    public void setActiveInputProcessor() {
+        Gdx.input.setInputProcessor(inputProcessor);
     }
 
 
