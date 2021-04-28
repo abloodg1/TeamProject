@@ -31,7 +31,7 @@ public class SliceState extends GameState {
         background = new Texture("collegeback.jpg");
         books = new ArrayList<>();
         sliceDot = new Texture("SliceDot.png");
-        sliceDim = new Dimension(0, 0, 75, 100);
+        sliceDim = new Dimension(0, 0, 75, 200);
         books.add(new Texture("ScienceTextbook.png"));
         books.add(new Texture("MathTextbook.png"));
         books.add(new Texture("EnglishTextbook.png"));
@@ -60,8 +60,8 @@ public class SliceState extends GameState {
             }
         }
         if (inputProcessor.isTouched()) {
-            for (Vector2 point : inputProcessor.points)
-                Utils.drawCenter(batch, sliceDot, sliceDim, point);
+            for (int i = 0; i < 10 && i < inputProcessor.points.size(); i++)
+                Utils.drawCenter(batch, sliceDot, sliceDim, inputProcessor.points.get(i));
         } else {
             inputProcessor.points.clear();
         }

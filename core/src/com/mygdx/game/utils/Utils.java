@@ -12,7 +12,7 @@ public class Utils {
 
     public static Dimension inputToGraphics(Dimension earth) {
         float newX = earth.x;
-        float newY = earth.y;
+        float newY;
         newY = Gdx.graphics.getHeight() - earth.y;
         return new Dimension(newX, newY, earth.width, earth.height);
     }
@@ -32,7 +32,7 @@ public class Utils {
     }
 
     public static void drawCenter(SpriteBatch batch, Texture img, Dimension dim, Vector2 vec) {
-        batch.draw(img, vec.x - dim.x / 2, vec.y - dim.y / 2, dim.width, dim.height);
+        batch.draw(img, vec.x - dim.width / 2, vec.y - dim.height / 2, dim.width, dim.height);
     }
 
 

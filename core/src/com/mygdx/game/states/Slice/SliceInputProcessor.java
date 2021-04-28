@@ -11,11 +11,12 @@ import com.mygdx.game.utils.Handler;
 import com.mygdx.game.utils.Utils;
 
 import java.util.ArrayList;
+import java.util.List;
 
 //At least X amount of points for a swipe to be considered.
 //if (Number of overlapping points > X), book gets cut.
 
-public class SliceInputProcessor implements InputProcessor {
+public class SliceInputProcessor extends ArrayList<Vector2> implements InputProcessor {
     private final Handler handler;
     ArrayList<Vector2> points;
     Vector2 getLast;
@@ -94,7 +95,7 @@ public class SliceInputProcessor implements InputProcessor {
         Vector2 newPoint = new Vector2(getPos.x, getPos.y);
         float distanceX = (getPos.x - getLast.x);
         float distanceY = (getPos.y - getLast.y);
-        double distance = Math.sqrt((distanceX * distanceX ) - (distanceY - distanceY)); //calculate distance between two points
+        double distance = Math.sqrt((distanceX * distanceX) + (distanceY * distanceY)); //calculate distance between two points
         if(distance > 5){ //only register new point if swipe points are far enough apart
             points.add(0, newPoint); //automatically inserts at beginning and shifts
             getLast = newPoint; //store last point for next input comparison
