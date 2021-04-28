@@ -18,11 +18,28 @@ public class SliceInputProcessor implements InputProcessor {
     ArrayList<Vector2> points;
     Vector2 getLast;
     ShapeRenderer swipeRender;
+    ArrayList<Vector2> safety;
+    ArrayList<Vector2> simplified;
+    public static int iter = 2;
+    private static final float tolerance = 35f;
 
     public SliceInputProcessor() {
         handler = Handler.getInstance();
-
+        this.points = new ArrayList<>();
+        this.safety = new ArrayList<>();
+        this.simplified = new ArrayList<>();
     }
+
+    public static float distSquared(Vector2 a, Vector2 b) {
+        float distX = a.x - b.x;
+        float distY = a.y - b.y;
+        return distX * distX + distY * distY;
+    }
+
+    public void execute() {
+        linemaker(points, simplified, tolerance);
+    }
+
     @Override
     public boolean keyDown(int keycode) {
         return false;
@@ -44,7 +61,7 @@ public class SliceInputProcessor implements InputProcessor {
         float translatedX = mathVector.x;
         float translatedY = mathVector.y;
         this.points.add(new Vector2(translatedX, translatedY)); //first point
-
+        execute();
         return false;
     }
 
@@ -64,6 +81,7 @@ public class SliceInputProcessor implements InputProcessor {
         if(distance > 5){ //only register new point if swipe points are far enough apart
             points.add(0, newPoint); //automatically inserts at beginning and shifts
             getLast = newPoint; //store last point for next input comparison
+            execute();
             return true;
         }
         return false;
@@ -77,5 +95,71 @@ public class SliceInputProcessor implements InputProcessor {
     @Override
     public boolean scrolled(float amountX, float amountY) {
         return false;
+    }
+
+    public static void straightened(ArrayList<Vector2> points, float tolerance, ArrayList<Vector2> output) {
+        int length = points.size();
+
+        Vector2 point = new Vector2();
+        Vector2 prevPoint = points.get(0);
+
+        output.clear();
+        output.add(prevPoint);
+
+        for (int i = 1; i < length; i++) {
+            point = points.get(i);
+            if (distSquared(point, prevPoint) > tolerance) {
+                output.add(point);
+                prevPoint = point;
+            }
+        }
+        if (!prevPoint.equals(point)) {
+            output.add(point);
+        }
+    }
+
+    public static void smoothing(ArrayList<Vector2> input, ArrayList<Vector2> output) {
+        output.clear();
+        output.ensureCapacity(input.size() * 2);
+        output.add(input.get(0));
+        for (int i = 0; i < input.size() - 1; i++) {
+            Vector2 pointA = input.get(i);
+            Vector2 pointB = input.get(i + 1);
+            //Implementation of Chaikin Smoothing Algorithm
+            Vector2 Quinn = new Vector2(0.75f * pointA.x + 0.25f * pointB.x, 0.75f * pointA.y + 0.25f * pointB.y);
+            Vector2 Russell = new Vector2(0.25f * pointA.x + 0.75f * pointB.x, 0.25f * pointA.y + 0.75f * pointB.y);
+            output.add(Quinn);
+            output.add(Russell);
+        }
+        output.add(input.get(input.size() - 1));
+    }
+
+    public void linemaker(ArrayList<Vector2> input, ArrayList<Vector2> output, float tolerance) {
+        output.clear();
+        if (input.size() <= 2) {
+            output.addAll(input);
+            return;
+        }
+
+        if (tolerance > 0 && input.size() > 3) {
+            straightened(input, tolerance * tolerance, safety);
+            input = safety;
+        }
+
+        if (iter <= 0) {
+            output.addAll(input);
+        } else if (iter == 1) {
+            smoothing(input, output);
+        } else {
+            int temp = iter;
+            do {
+                smoothing(input, output);
+                safety.clear();
+                safety.addAll(output);
+                ArrayList<Vector2> retire = output;
+                input = safety;
+                output = retire;
+            } while (--temp > 0);
+        }
     }
 }
