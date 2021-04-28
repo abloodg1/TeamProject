@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.widgets.Dimension;
 
@@ -28,6 +29,10 @@ public class Utils {
 
     public static void drawImg(SpriteBatch batch, Texture img, Dimension dim) {
         batch.draw(img, dim.x, dim.y, dim.width, dim.height);
+    }
+
+    public static void drawCenter(SpriteBatch batch, Texture img, Dimension dim, Vector2 vec) {
+        batch.draw(img, vec.x - dim.x / 2, vec.y - dim.y / 2, dim.width, dim.height);
     }
 
 

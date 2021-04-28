@@ -8,6 +8,7 @@ import com.mygdx.game.states.GameState;
 import com.mygdx.game.throwable;
 import com.mygdx.game.utils.Handler;
 import com.mygdx.game.utils.Utils;
+import com.mygdx.game.widgets.Dimension;
 
 import java.util.ArrayList;
 
@@ -16,6 +17,7 @@ public class SliceState extends GameState {
     private final Handler handler;
     private final ArrayList<Texture> books;
     private final ArrayList<throwable> thrown;
+    Dimension sliceDim;
     int timer = 0;
     int index = 0;
     Texture background;
@@ -29,6 +31,7 @@ public class SliceState extends GameState {
         background = new Texture("collegeback.jpg");
         books = new ArrayList<>();
         sliceDot = new Texture("SliceDot.png");
+        sliceDim = new Dimension(0, 0, 75, 100);
         books.add(new Texture("ScienceTextbook.png"));
         books.add(new Texture("MathTextbook.png"));
         books.add(new Texture("EnglishTextbook.png"));
@@ -58,7 +61,9 @@ public class SliceState extends GameState {
         }
         if (inputProcessor.isTouched()) {
             for (Vector2 point : inputProcessor.points)
-                batch.draw(sliceDot, point.x, point.y);
+                Utils.drawCenter(batch, sliceDot, sliceDim, point);
+        } else {
+            inputProcessor.points.clear();
         }
 
     }
