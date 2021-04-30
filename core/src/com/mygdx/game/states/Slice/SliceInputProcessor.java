@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.mygdx.game.throwable;
 import com.mygdx.game.utils.Handler;
 import com.mygdx.game.utils.Utils;
 
@@ -31,6 +32,12 @@ public class SliceInputProcessor extends ArrayList<Vector2> implements InputProc
     }
 
     public boolean isTouched = false;
+
+    public boolean isDragged() {
+        return isDragged;
+    }
+
+    public boolean isDragged = false;
 
     public SliceInputProcessor() {
         Gdx.app.setLogLevel(Application.LOG_DEBUG);
@@ -82,10 +89,10 @@ public class SliceInputProcessor extends ArrayList<Vector2> implements InputProc
         return false;
     }
 
-
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         isTouched = false;
+        isDragged = false;
         return false;
     }
 
@@ -103,6 +110,7 @@ public class SliceInputProcessor extends ArrayList<Vector2> implements InputProc
             return true;
         }
         isTouched = true;
+        isDragged = true;
         return false;
     }
 

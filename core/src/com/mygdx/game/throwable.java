@@ -12,10 +12,14 @@ public class throwable {
     float screenWidth = handler.screenWidth;
     float screenHeight = handler.screenHeight;
     Texture img;
-    float grav = 1;
+    float grav = 2;
 
     public float getImgHeight() {
         return imgHeight;
+    }
+
+    public float getImgWidth() {
+        return imgWidth;
     }
 
     float imgHeight = 750;
@@ -31,7 +35,7 @@ public class throwable {
     public throwable(Texture sprite) {
         img = sprite;
         xV = (float) (1 + (Math.random() * 5));
-        yV = (float) (30 + (Math.random() * 3));
+        yV = (float) (50 + (Math.random() * 3));
         if (x > (screenWidth - imgWidth) / 2) {
             xV = xV * -1;
         }
