@@ -16,7 +16,7 @@ public class SliceState extends GameState {
     private final SliceInputProcessor inputProcessor;
     private final Handler handler;
     private final ArrayList<Texture> books;
-    private final ArrayList<throwable> thrown;
+    public final ArrayList<throwable> thrown;
     Dimension sliceDim;
     int timer = 0;
     int index = 0;
@@ -38,7 +38,6 @@ public class SliceState extends GameState {
         books.add(new Texture("EnglishTextbook.png"));
         //int index = (int) (Math.random() * books.size());
     }
-
 
     public void render(SpriteBatch batch) {
         batch.draw(background, 0, 0, handler.screenWidth, handler.screenHeight);
@@ -62,11 +61,28 @@ public class SliceState extends GameState {
             }
         }
         if (inputProcessor.isTouched()) {
-            for (int i = 0; i < 10 && i < inputProcessor.points.size(); i++)
+            for (int i = 0; i < 10 && i < inputProcessor.points.size(); i++) {
                 Utils.drawCenter(batch, sliceDot, sliceDim, inputProcessor.points.get(i));
+                if(i < 3 && inputProcessor.isDragged())  {
+                    for (int j = 0; j < thrown.size(); j++) {
+                        if (inputProcessor.points.get(i).x > thrown.get(j).getX()
+                                && inputProcessor.points.get(i).x < thrown.get(j).getX() + (thrown.get(j).getImgWidth())
+                                && inputProcessor.points.get(i).y > thrown.get(j).getY()
+                                && inputProcessor.points.get(i).y < thrown.get(j).getY() + (thrown.get(j).getImgHeight())) {
+                            System.out.println("Book detected");
+                            thrown.remove(j);
+                            j--;
+                        }
+                    }
+                }
+            }
         } else {
             inputProcessor.points.clear();
         }
+
+        //for (int i = 0; i < inputProcessor.points.size(); i++){
+
+        //}
 
     }
 
