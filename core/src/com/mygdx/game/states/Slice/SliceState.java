@@ -22,6 +22,7 @@ public class SliceState extends GameState {
     int index = 0;
     Texture background;
     Texture sliceDot;
+    int score = 0;
 
     public SliceState() {
         this.handler = Handler.getInstance();
@@ -57,6 +58,7 @@ public class SliceState extends GameState {
             if (book.getY() < 0 - book.getImgHeight()) {
                 thrown.remove(book);
                 i--;
+                score++;
             }
         }
         if (inputProcessor.isTouched()) {
