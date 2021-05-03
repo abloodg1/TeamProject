@@ -1,7 +1,10 @@
 package com.mygdx.game.states.Slice;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.states.GameState;
@@ -22,6 +25,9 @@ public class SliceState extends GameState {
     int index = 0;
     Texture background;
     Texture sliceDot;
+    int score = 0;
+    BitmapFont scorebox;
+    GlyphLayout scoreLayout;
 
     public SliceState() {
         this.handler = Handler.getInstance();
@@ -36,10 +42,15 @@ public class SliceState extends GameState {
         books.add(new Texture("MathTextbook.png"));
         books.add(new Texture("EnglishTextbook.png"));
         //int index = (int) (Math.random() * books.size());
+        scorebox = new BitmapFont();
+        scorebox.setColor(Color.RED);
+        scorebox.getData().setScale(2);
     }
 
     public void render(SpriteBatch batch) {
         batch.draw(background, 0, 0, handler.screenWidth, handler.screenHeight);
+        scoreLayout = new GlyphLayout(scorebox, "Books Destroyed: " + score);
+        scorebox.draw(batch, scoreLayout, 25, 1500);
         timer++;
         if (timer % 30 == 0) {
             thrown.add(new throwable(books.get(index)));
@@ -67,9 +78,9 @@ public class SliceState extends GameState {
                                 && inputProcessor.points.get(i).x < thrown.get(j).getX() + (thrown.get(j).getImgWidth())
                                 && inputProcessor.points.get(i).y > thrown.get(j).getY()
                                 && inputProcessor.points.get(i).y < thrown.get(j).getY() + (thrown.get(j).getImgHeight())) {
-                            System.out.println("Book detected");
                             thrown.remove(j);
                             j--;
+                            score++;
                         }
                     }
                 }
@@ -78,9 +89,7 @@ public class SliceState extends GameState {
             inputProcessor.points.clear();
         }
 
-        //for (int i = 0; i < inputProcessor.points.size(); i++){
 
-        //}
 
     }
 
