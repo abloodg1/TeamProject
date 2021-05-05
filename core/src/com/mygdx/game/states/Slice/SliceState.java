@@ -81,6 +81,8 @@ public class SliceState extends GameState {
                             thrown.remove(j);
                             j--;
                             score++;
+                            inputProcessor.points.clear();
+                            break;
                         }
                     }
                 }
