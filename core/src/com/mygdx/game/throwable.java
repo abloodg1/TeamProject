@@ -22,6 +22,9 @@ public class throwable {
         return imgWidth;
     }
 
+    public Texture getImg(){
+        return img;
+    }
     float imgHeight = 750;
     float imgWidth = 300;
     float x = (float) (Math.random() * (screenWidth - imgWidth));

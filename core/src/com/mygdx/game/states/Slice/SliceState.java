@@ -20,6 +20,8 @@ public class SliceState extends GameState {
     private final Handler handler;
     private final ArrayList<Texture> books;
     public final ArrayList<throwable> thrown;
+    public final ArrayList<Texture> halves;
+    public final ArrayList<throwable> halfMove;
     Dimension sliceDim;
     int timer = 0;
     int index = 0;
@@ -39,11 +41,17 @@ public class SliceState extends GameState {
         background = new Texture("collegeback.jpg");
         strike = new Texture("f.JPG");
         books = new ArrayList<>();
+        halves = new ArrayList<>();
+        halfMove = new ArrayList<>();
         sliceDot = new Texture("SliceDot.png");
         sliceDim = new Dimension(0, 0, 75, 200);
         books.add(new Texture("ScienceTextbook.png"));
         books.add(new Texture("MathTextbook.png"));
         books.add(new Texture("EnglishTextbook.png"));
+
+        halves.add(new Texture(""));
+
+
         //int index = (int) (Math.random() * books.size());
         scorebox = new BitmapFont();
         scorebox.setColor(Color.RED);
@@ -94,6 +102,8 @@ public class SliceState extends GameState {
                             thrown.remove(j);
                             j--;
                             score++;
+                            if(thrown)
+                            halfMove.add(new throwable(halves.get()));
                             inputProcessor.points.clear();
                             break;
                         }
