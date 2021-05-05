@@ -25,6 +25,8 @@ public class SliceState extends GameState {
     int index = 0;
     Texture background;
     Texture sliceDot;
+    Texture strike;
+    int strikeCount = 0;
     int score = 0;
     BitmapFont scorebox;
     GlyphLayout scoreLayout;
@@ -35,6 +37,7 @@ public class SliceState extends GameState {
 
         thrown = new ArrayList<>();
         background = new Texture("collegeback.jpg");
+        strike = new Texture("f.JPG");
         books = new ArrayList<>();
         sliceDot = new Texture("SliceDot.png");
         sliceDim = new Dimension(0, 0, 75, 200);
@@ -44,15 +47,21 @@ public class SliceState extends GameState {
         //int index = (int) (Math.random() * books.size());
         scorebox = new BitmapFont();
         scorebox.setColor(Color.RED);
-        scorebox.getData().setScale(2);
+        scorebox.getData().setScale(2, 3);
     }
 
     public void render(SpriteBatch batch) {
         batch.draw(background, 0, 0, handler.screenWidth, handler.screenHeight);
         scoreLayout = new GlyphLayout(scorebox, "Books Destroyed: " + score);
         scorebox.draw(batch, scoreLayout, 25, 1500);
+        int strikeX = 725;
+        int strikeY = 1500;
+        for(int i = 0; i < strikeCount; i++){
+            batch.draw(strike, strikeX, strikeY, 50, 125);
+            strikeX -= 60;
+        }
         timer++;
-        if (timer % 30 == 0) {
+        if (timer % 60 == 0) {
             thrown.add(new throwable(books.get(index)));
             if (index + 1 >= books.size()) {
                 index = 0;
@@ -67,7 +76,11 @@ public class SliceState extends GameState {
             if (book.getY() < 0 - book.getImgHeight()) {
                 thrown.remove(book);
                 i--;
+                if(strikeCount < 3) {
+                    strikeCount++;
+                }
             }
+
         }
         if (inputProcessor.isTouched()) {
             for (int i = 0; i < 10 && i < inputProcessor.points.size(); i++) {
@@ -84,6 +97,7 @@ public class SliceState extends GameState {
                             inputProcessor.points.clear();
                             break;
                         }
+
                     }
                 }
             }
