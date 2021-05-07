@@ -114,8 +114,8 @@ public class SliceState extends GameState {
                                 && inputProcessor.points.get(i).x < thrown.get(j).getX() + (thrown.get(j).getImgWidth())
                                 && inputProcessor.points.get(i).y > thrown.get(j).getY()
                                 && inputProcessor.points.get(i).y < thrown.get(j).getY() + (thrown.get(j).getImgHeight())) {
-                            thrown.remove(j);
-                            j--;
+
+
                             score++;
 
                             if(thrown.get(i).getImg() == books.get(0)) halfInd = 0;
@@ -126,6 +126,9 @@ public class SliceState extends GameState {
                             xV = Math.abs(thrown.get(j).getxV());
                             halfMove.get(halfMove.size()-2).setAll(thrown.get(j).getX(), thrown.get(j).getY(), -xV, thrown.get(j).getyV());
                             halfMove.get(halfMove.size()-1).setAll(thrown.get(j).getX() + thrown.get(j).getImgWidth()/2, thrown.get(j).getY(), xV, thrown.get(j).getyV());
+
+                            thrown.remove(j);
+                            j--;
                             inputProcessor.points.clear();
                             break;
                         }
