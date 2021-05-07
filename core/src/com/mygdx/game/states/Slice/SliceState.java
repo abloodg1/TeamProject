@@ -48,8 +48,12 @@ public class SliceState extends GameState {
         books.add(new Texture("ScienceTextbook.png"));
         books.add(new Texture("MathTextbook.png"));
         books.add(new Texture("EnglishTextbook.png"));
-
-        halves.add(new Texture(""));
+        halves.add(new Texture("ScienceTextbookHalf1.png"));
+        halves.add(new Texture("ScienceTextbookHalf2.png"));
+        halves.add(new Texture("MathTextbookHalf1.png"));
+        halves.add(new Texture("MathTextbookHalf2.png"));
+        halves.add(new Texture("EnglishTextbookHalf1.png"));
+        halves.add(new Texture("EnglishTextbookHalf2.png"));
 
 
         //int index = (int) (Math.random() * books.size());
@@ -90,7 +94,18 @@ public class SliceState extends GameState {
             }
 
         }
+        for(int i =0; i< halfMove.size();i++){
+            throwable half = halfMove.get(i);
+            half.draw(batch);
+            half.update();
+            if (half.getY() < 0 - half.getImgHeight()) {
+                halfMove.remove(half);
+                i--;
+            }
+        }
         if (inputProcessor.isTouched()) {
+            int halfInd = 0;
+            float xV;
             for (int i = 0; i < 10 && i < inputProcessor.points.size(); i++) {
                 Utils.drawCenter(batch, sliceDot, sliceDim, inputProcessor.points.get(i));
                 if(i < 3 && inputProcessor.isDragged())  {
@@ -102,8 +117,15 @@ public class SliceState extends GameState {
                             thrown.remove(j);
                             j--;
                             score++;
-                            if(thrown)
-                            halfMove.add(new throwable(halves.get()));
+
+                            if(thrown.get(i).getImg() == books.get(0)) halfInd = 0;
+                            if(thrown.get(i).getImg() == books.get(1)) halfInd = 2;
+                            if(thrown.get(i).getImg() == books.get(2)) halfInd = 4;
+                            halfMove.add(new throwable(halves.get(halfInd)));
+                            halfMove.add(new throwable(halves.get(halfInd + 1)));
+                            xV = Math.abs(thrown.get(j).getxV());
+                            halfMove.get(halfMove.size()-2).setAll(thrown.get(j).getX(), thrown.get(j).getY(), -xV, thrown.get(j).getyV());
+                            halfMove.get(halfMove.size()-1).setAll(thrown.get(j).getX() + thrown.get(j).getImgWidth()/2, thrown.get(j).getY(), xV, thrown.get(j).getyV());
                             inputProcessor.points.clear();
                             break;
                         }

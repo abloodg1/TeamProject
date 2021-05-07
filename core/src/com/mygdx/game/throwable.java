@@ -54,23 +54,31 @@ public class throwable {
         batch.draw(img, x, y, imgWidth, imgHeight);
     }
 
-    public double getX() {
+    public float getX() {
         return x;
     }
 
-    public double getY() {
+    public float getY() {
         return y;
     }
 
-    public double getGrav(){
+    public void setAll(float newX, float newY, float newxV, float newyV){
+        x = newX;
+        y = newY;
+        xV = newxV;
+        yV = newyV;
+        imgWidth = imgWidth/2;
+    }
+
+    public float getGrav(){
         return grav;
     }
 
-    public double getxV(){
+    public float getxV(){
         return xV;
     }
 
-    public double getxY(){
+    public float getyV(){
         return yV;
     }
 
