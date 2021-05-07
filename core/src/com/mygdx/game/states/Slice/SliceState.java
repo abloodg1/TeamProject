@@ -118,9 +118,9 @@ public class SliceState extends GameState {
 
                             score++;
 
-                            if(thrown.get(i).getImg() == books.get(0)) halfInd = 0;
-                            if(thrown.get(i).getImg() == books.get(1)) halfInd = 2;
-                            if(thrown.get(i).getImg() == books.get(2)) halfInd = 4;
+                            if(thrown.get(j).getImg() == books.get(0)) halfInd = 0;
+                            if(thrown.get(j).getImg() == books.get(1)) halfInd = 2;
+                            if(thrown.get(j).getImg() == books.get(2)) halfInd = 4;
                             halfMove.add(new throwable(halves.get(halfInd)));
                             halfMove.add(new throwable(halves.get(halfInd + 1)));
                             xV = Math.abs(thrown.get(j).getxV());
