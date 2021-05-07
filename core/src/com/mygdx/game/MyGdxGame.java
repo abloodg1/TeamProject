@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.states.Slice.SliceState;
+import com.mygdx.game.states.TitleState;
 import com.mygdx.game.utils.Handler;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	SpriteBatch batch;
 	private Handler handler;
 	private SliceState sliceState;
+	private TitleState titleState;
 	private Texture background;
 
 	private static final float SCREEN_WIDTH = 800;
@@ -37,12 +39,12 @@ public class MyGdxGame extends ApplicationAdapter {
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, SCREEN_WIDTH, SCREEN_HEIGHT);
 		handler.camera = camera;
-
 		batch = new SpriteBatch();
-
 		sliceState = new SliceState();
-		handler.setActiveState(sliceState);
-
+		titleState = new TitleState();
+		handler.sliceState = sliceState;
+		handler.titleState = titleState;
+		handler.setActiveState(titleState);
 
 
 	}
