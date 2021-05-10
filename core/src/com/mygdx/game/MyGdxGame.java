@@ -1,6 +1,5 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -8,12 +7,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.states.Slice.SliceState;
-import com.mygdx.game.states.TitleState;
+import com.mygdx.game.states.Title.TitleState;
 import com.mygdx.game.utils.Handler;
-
-import java.util.ArrayList;
-
-import javax.xml.soap.Text;
 
 public class MyGdxGame extends ApplicationAdapter {
 	SpriteBatch batch;

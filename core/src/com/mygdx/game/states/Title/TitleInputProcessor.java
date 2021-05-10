@@ -1,4 +1,4 @@
-package com.mygdx.game.states;
+package com.mygdx.game.states.Title;
 
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector3;

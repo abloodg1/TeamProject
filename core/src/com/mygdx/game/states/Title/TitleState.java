@@ -1,9 +1,11 @@
-package com.mygdx.game.states;
+package com.mygdx.game.states.Title;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import com.mygdx.game.states.GameState;
+import com.mygdx.game.states.Title.TitleInputProcessor;
 import com.mygdx.game.utils.Handler;
 import com.mygdx.game.utils.Utils;
 import com.mygdx.game.widgets.Button;
@@ -18,7 +20,7 @@ public class TitleState extends GameState {
     private final Dimension optionsSize;
     private final Button startButton;
     private Button optionsButton;
-    private final TitleInputProcessor inputProcessor;
+    private final com.mygdx.game.states.Title.TitleInputProcessor inputProcessor;
     private final Handler handler;
 
     public TitleState() {

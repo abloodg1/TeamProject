@@ -1,10 +1,9 @@
 package com.mygdx.game.utils;
 
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.mygdx.game.states.GameState;
 import com.mygdx.game.states.Slice.SliceState;
-import com.mygdx.game.states.TitleState;
+import com.mygdx.game.states.Title.TitleState;
 //import future states
 
 public class Handler {
