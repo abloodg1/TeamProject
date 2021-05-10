@@ -1,6 +1,7 @@
 package com.mygdx.game.utils;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.mygdx.game.states.End.EndState;
 import com.mygdx.game.states.GameState;
 import com.mygdx.game.states.Slice.SliceState;
 import com.mygdx.game.states.Title.TitleState;
@@ -12,6 +13,7 @@ public class Handler {
     public GameState activeState;
     public SliceState sliceState;
     public TitleState titleState;
+    public EndState endState;
     public OrthographicCamera camera;
     public float screenWidth;
     public float screenHeight;

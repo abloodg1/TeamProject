@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.states.End.EndState;
 import com.mygdx.game.states.Slice.SliceState;
 import com.mygdx.game.states.Title.TitleState;
 import com.mygdx.game.utils.Handler;
@@ -15,6 +16,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	private Handler handler;
 	private SliceState sliceState;
 	private TitleState titleState;
+	private EndState endState;
 	private Texture background;
 
 	private static final float SCREEN_WIDTH = 800;
@@ -37,8 +39,10 @@ public class MyGdxGame extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		sliceState = new SliceState();
 		titleState = new TitleState();
+		endState = new EndState();
 		handler.sliceState = sliceState;
 		handler.titleState = titleState;
+		handler.endState = endState;
 		handler.setActiveState(titleState);
 
 
