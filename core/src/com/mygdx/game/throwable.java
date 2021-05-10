@@ -67,7 +67,7 @@ public class throwable {
         y = newY;
         xV = newxV;
         yV = newyV;
-        imgWidth = imgWidth/2;
+        //imgWidth = 200;
     }
 
     public float getGrav(){
