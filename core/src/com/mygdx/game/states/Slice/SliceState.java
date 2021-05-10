@@ -67,7 +67,7 @@ public class SliceState extends GameState {
         scoreLayout = new GlyphLayout(scorebox, "Books Destroyed: " + score);
         scorebox.draw(batch, scoreLayout, 25, 1500);
         int strikeX = 725;
-        int strikeY = 1500;
+        int strikeY = 1450;
         for(int i = 0; i < strikeCount; i++){
             batch.draw(strike, strikeX, strikeY, 50, 125);
             strikeX -= 60;
