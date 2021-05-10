@@ -59,7 +59,7 @@ public class SliceState extends GameState {
         //int index = (int) (Math.random() * books.size());
         scorebox = new BitmapFont();
         scorebox.setColor(Color.RED);
-        scorebox.getData().setScale(2, 3);
+        scorebox.getData().setScale(1, 3);
     }
 
     public void render(SpriteBatch batch) {
