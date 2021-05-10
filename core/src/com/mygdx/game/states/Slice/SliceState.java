@@ -88,7 +88,7 @@ public class SliceState extends GameState {
             if (book.getY() < 0 - book.getImgHeight()) {
                 thrown.remove(book);
                 i--;
-                if (strikeCount < 3) {
+                if (strikeCount < 2) {
                     strikeCount++;
                 } else {
                     handler.setActiveState(handler.endState);
