@@ -40,7 +40,7 @@ public class SliceState extends GameState {
         thrown = new ArrayList<>();
         background = new Texture("collegeback.jpg");
         strike = new Texture("F.png");
-        unfilledStrike = new Texture();
+        unfilledStrike = new Texture("darkF.png");
         books = new ArrayList<>();
         halves = new ArrayList<>();
         halfMove = new ArrayList<>();
