@@ -1,6 +1,7 @@
 package com.mygdx.game.states.Slice;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -22,6 +23,7 @@ public class SliceState extends GameState {
     public final ArrayList<throwable> thrown;
     public final ArrayList<Texture> halves;
     public final ArrayList<throwable> halfMove;
+    private final Sound slice;
     Dimension sliceDim;
     int timer = 0;
     int index = 0;
@@ -36,7 +38,7 @@ public class SliceState extends GameState {
     public SliceState() {
         this.handler = Handler.getInstance();
         inputProcessor = new SliceInputProcessor();
-
+        slice = Gdx.audio.newSound(Gdx.files.internal("slice.mp3"));
         thrown = new ArrayList<>();
         background = new Texture("collegeback.jpg");
         strike = new Texture("F.png");
@@ -126,7 +128,7 @@ public class SliceState extends GameState {
 
 
                             score++;
-
+                            slice.play();
                             if(thrown.get(j).getImg() == books.get(0)) halfInd = 0;
                             if(thrown.get(j).getImg() == books.get(1)) halfInd = 2;
                             if(thrown.get(j).getImg() == books.get(2)) halfInd = 4;
