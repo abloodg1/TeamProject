@@ -27,7 +27,7 @@ public class SliceState extends GameState {
     int index = 0;
     Texture background;
     Texture sliceDot;
-    Texture strike;
+    Texture strike, unfilledStrike;
     int strikeCount = 0;
     int score = 0;
     BitmapFont scorebox;
@@ -40,6 +40,7 @@ public class SliceState extends GameState {
         thrown = new ArrayList<>();
         background = new Texture("collegeback.jpg");
         strike = new Texture("F.png");
+        unfilledStrike = new Texture();
         books = new ArrayList<>();
         halves = new ArrayList<>();
         halfMove = new ArrayList<>();
@@ -70,6 +71,11 @@ public class SliceState extends GameState {
         int strikeY = 1450;
         for(int i = 0; i < strikeCount; i++){
             batch.draw(strike, strikeX, strikeY, 50, 125);
+            strikeX -= 60;
+        }
+        for (int i = strikeCount; i < 3; i++)
+        {
+            batch.draw(unfilledStrike, strikeX, strikeY, 50, 125);
             strikeX -= 60;
         }
         timer++;
