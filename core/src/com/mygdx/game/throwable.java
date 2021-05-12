@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.utils.Handler;
 
-import javax.xml.soap.Text;
 
 public class throwable {
     Handler handler = Handler.getInstance();

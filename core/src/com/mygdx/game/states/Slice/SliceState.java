@@ -97,6 +97,7 @@ public class SliceState extends GameState {
                 if (strikeCount < 2) {
                     strikeCount++;
                 } else {
+                    handler.endState.setScore(score);
                     handler.setActiveState(handler.endState);
                 }
             }
@@ -149,11 +150,20 @@ public class SliceState extends GameState {
         }
 
 
-
     }
 
     public void setActiveInputProcessor() {
         Gdx.input.setInputProcessor(inputProcessor);
+    }
+
+    public void resetGame() {
+        score = 0;
+        strikeCount = 0;
+        timer = 0;
+        thrown.clear();
+        halfMove.clear();
+        index = 0;
+        inputProcessor.points.clear();
     }
 
 
