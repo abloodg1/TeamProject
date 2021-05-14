@@ -57,7 +57,6 @@ public class TitleState extends GameState {
 
     public void render(SpriteBatch batch) {
         Utils.drawImg(batch, backgroundImage, backgroundSize);
-        Utils.drawImg(batch, optionsImage, optionsSize);
         startButton.render(batch);
     }
 
