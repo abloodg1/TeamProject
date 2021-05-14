@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -31,15 +32,14 @@ public class MyGdxGame extends ApplicationAdapter {
 		handler = Handler.getInstance();
 		handler.screenWidth = SCREEN_WIDTH;
 		handler.screenHeight = SCREEN_HEIGHT;
-
-
+		Preferences preferences = Gdx.app.getPreferences("My Preferences");
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, SCREEN_WIDTH, SCREEN_HEIGHT);
 		handler.camera = camera;
 		batch = new SpriteBatch();
 		sliceState = new SliceState();
 		titleState = new TitleState();
-		endState = new EndState();
+		endState = new EndState(preferences);
 		handler.sliceState = sliceState;
 		handler.titleState = titleState;
 		handler.endState = endState;

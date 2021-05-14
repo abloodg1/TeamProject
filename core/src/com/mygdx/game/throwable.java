@@ -33,10 +33,16 @@ public class throwable {
     float xV;
     float yV;
 
-    public void setImgSize(float width, float height){
+    public void setImgSize(float width, float height) {
         imgWidth = width;
         imgHeight = height;
     }
+
+    public void updateInitVals() {
+        x = (float) (Math.random() * (screenWidth - imgWidth));
+        y = 0 - imgHeight;
+    }
+
     public throwable(Texture sprite) {
         img = sprite;
         xV = (float) (1 + (Math.random() * 5));

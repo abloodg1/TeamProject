@@ -35,6 +35,7 @@ public class SliceState extends GameState {
     int score = 0;
     BitmapFont scorebox;
     GlyphLayout scoreLayout;
+    private final int delay;
 
     public SliceState() {
         this.handler = Handler.getInstance();
@@ -45,8 +46,7 @@ public class SliceState extends GameState {
         strike = new Texture("F.png");
         unfilledStrike = new Texture("darkF.png");
         coffee = new Texture("coffee.png");
-
-
+        delay = 45;
         books = new ArrayList<>();
         halves = new ArrayList<>();
         halfMove = new ArrayList<>();
@@ -86,14 +86,15 @@ public class SliceState extends GameState {
         }
         timer++;
 
-        if (timer % 30 == 0){
+        if (timer % (delay * 1.5 + 19) == 0) {
             throwable coffeeObj = new throwable(coffee);
             coffeeObj.setImgSize(150, 375);
+            coffeeObj.updateInitVals();
             thrown.add(coffeeObj);
         }
 
-        if (timer % 60 == 0) {
-            //thrown.add(new throwable(books.get(index)));
+        if (timer % delay == 0) {
+            thrown.add(new throwable(books.get(index)));
             if (index + 1 >= books.size()) {
                 index = 0;
             } else {
@@ -107,6 +108,7 @@ public class SliceState extends GameState {
             book.draw(batch);
             book.update();
             if (book.getY() < 0 - book.getImgHeight()) {
+                System.out.print("Book Removed. Height = " + book.getY() + "\n");
                 thrown.remove(book);
                 i--;
                 if (strikeCount < 2) {
@@ -140,13 +142,12 @@ public class SliceState extends GameState {
                                 && inputProcessor.points.get(i).x < thrown.get(j).getX() + (thrown.get(j).getImgWidth())
                                 && inputProcessor.points.get(i).y > thrown.get(j).getY()
                                 && inputProcessor.points.get(i).y < thrown.get(j).getY() + (thrown.get(j).getImgHeight())) {
-
-
-                            score++;
-                            slice.play();
-                            if(thrown.get(j).getImg() == coffee){
-                                strikeCount = 3;
-                                break;
+                            if (thrown.get(j).getImg() == coffee) {
+                                handler.endState.setScore(score);
+                                handler.setActiveState(handler.endState);
+                            } else {
+                                score++;
+                                slice.play();
                             }
 
                             if(thrown.get(j).getImg() == books.get(0)) halfInd = 0;
