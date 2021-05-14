@@ -24,6 +24,7 @@ public class SliceState extends GameState {
     public final ArrayList<Texture> halves;
     public final ArrayList<throwable> halfMove;
     private final Sound slice;
+    Texture coffee;
     Dimension sliceDim;
     int timer = 0;
     int index = 0;
@@ -43,6 +44,9 @@ public class SliceState extends GameState {
         background = new Texture("collegeback.jpg");
         strike = new Texture("F.png");
         unfilledStrike = new Texture("darkF.png");
+        coffee = new Texture("coffee.png");
+
+
         books = new ArrayList<>();
         halves = new ArrayList<>();
         halfMove = new ArrayList<>();
@@ -81,14 +85,23 @@ public class SliceState extends GameState {
             strikeX -= 60;
         }
         timer++;
+
+        if (timer % 30 == 0){
+            throwable coffeeObj = new throwable(coffee);
+            coffeeObj.setImgSize(150, 375);
+            thrown.add(coffeeObj);
+        }
+
         if (timer % 60 == 0) {
-            thrown.add(new throwable(books.get(index)));
+            //thrown.add(new throwable(books.get(index)));
             if (index + 1 >= books.size()) {
                 index = 0;
             } else {
                 index++;
             }
         }
+
+
         for (int i = 0; i < thrown.size(); i++) {
             throwable book = thrown.get(i);
             book.draw(batch);
@@ -97,7 +110,9 @@ public class SliceState extends GameState {
                 thrown.remove(book);
                 i--;
                 if (strikeCount < 2) {
-                    strikeCount++;
+                    if(book.getImg() != coffee){
+                        strikeCount++;
+                    }
                 } else {
                     handler.endState.setScore(score);
                     handler.setActiveState(handler.endState);
@@ -129,6 +144,11 @@ public class SliceState extends GameState {
 
                             score++;
                             slice.play();
+                            if(thrown.get(j).getImg() == coffee){
+                                strikeCount = 3;
+                                break;
+                            }
+
                             if(thrown.get(j).getImg() == books.get(0)) halfInd = 0;
                             if(thrown.get(j).getImg() == books.get(1)) halfInd = 2;
                             if(thrown.get(j).getImg() == books.get(2)) halfInd = 4;
