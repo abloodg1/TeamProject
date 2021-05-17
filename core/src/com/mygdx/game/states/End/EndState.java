@@ -14,8 +14,6 @@ import com.mygdx.game.utils.Utils;
 import com.mygdx.game.widgets.Button;
 import com.mygdx.game.widgets.Dimension;
 
-import sun.text.resources.cldr.ext.FormatData_ar_LY;
-
 public class EndState extends GameState {
     private final Texture backgroundImage;
     private final Texture quitButtonImage;
